@@ -504,50 +504,66 @@ h1, h2, h3, .app-logo-main, .main-title {
     margin: 0 !important;
     line-height: 1.2;
 }
-/* MOBILE RESPONSIVENESS: Special adjustment for devices under 600px */
- @media only screen and (max-width: 600px) {
+/* --- MOBILE RESPONSIVENESS SETTINGS --- */
+@media only screen and (max-width: 600px) {
     body {
         padding: 0;
         margin: 0;
         background: #000;
-        display: block; /* Align to top for mobile view */
+        overflow: hidden; /* Prevents double scrolling */
     }
 
-    /* Main Container Adjustment for Mobile */
+    /* Adjusted Container for Mobile Viewports */
     .app-container {
-        width: 100vw;       /* Full viewport width */
-        height: 100vh;      /* Full viewport height */
-        margin: 0;
-        border: none;       /* Remove border for native app feel */
-        border-radius: 0;   /* Square corners for full-screen display */
+        width: 100vw;
+        height: 100dvh; /* Dynamic height for mobile browsers */
+        border-radius: 0;
+        border: none;
         box-shadow: none;
+        display: flex;
+        flex-direction: column;
     }
 
-    /* Optimized UI Elements for Small Screens */
+    /* Fixed Navigation at the very bottom */
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background: #121212;
+        border-top: 1px solid #333;
+        z-index: 5000; /* Ensures icons are always on top */
+        padding-bottom: env(safe-area-inset-bottom);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    /* Padding to ensure content doesn't hide behind Nav Bar */
+    .page {
+        padding-bottom: 120px !important;
+        overflow-y: auto;
+    }
+
+    /* UI Adjustments */
     .glass-card {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        padding: 12px;
+        padding: 15px;
         border-radius: 15px;
     }
 
-    /* Enhanced Touch Targets for Mobile Interaction */
+    /* Mobile Friendly Buttons */
     .start-focus-btn, .btn-primary {
         padding: 16px;
         font-size: 16px;
         border-radius: 12px;
     }
 
-    /* Navigation Adjustment */
-    .bottom-nav {
-        height: 75px;
-        padding-bottom: env(safe-area-inset-bottom); /* Support for notch phones */
-    }
-
-    /* Graph Container Scrolling */
-    .graph-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+    /* Adjusted Floating Action Button (+) */
+    .fab {
+        bottom: 90px; /* Moves + button above the Nav bar */
+        right: 20px;
+        z-index: 4000;
     }
 }
 
