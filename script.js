@@ -68,6 +68,12 @@ function startApp() {
     document.getElementById('spanName').innerText = user;
     document.getElementById('initials').innerText = user.charAt(0).toUpperCase();
 
+    if (Notification.permission !== "granted") {
+        Notification.requestPermission().then(permission => {
+            console.log("Notification permission:", permission);
+        });
+    }
+
     loadQuests();
 }
 
@@ -350,30 +356,38 @@ function startAccessTimer(minutes) {
     }, 1000);
 }
 
+// --- IMPROVED AI MONITORING FOR MOBILE APK ---
+window.addEventListener("blur", () => {
+    sendAIAlert();
+});
+
 document.addEventListener("visibilitychange", () => {
-    if (document.hidden && localStorage.getItem('isLoggedIn') === 'true') {
-        
+    if (document.hidden) {
+        sendAIAlert();
+    }
+});
+
+function sendAIAlert() {
+    if (localStorage.getItem('isLoggedIn') === 'true') {
         const warningTitle = "🚨 AI SECURITY ALERT!";
         const warningOptions = {
-            body: "Get back to work! AI is monitoring your tab activity. 🔥",
-            icon: "images/my-logo.png"
-             };
+            body: "Simran, get back to focus! Activity detected outside the app. 🔥",
+            icon: "images/stage1.jpg"
+        };
 
-        // Instant Browser Notification
+        // Native Alert (Fastest)
         if (Notification.permission === "granted") {
             new Notification(warningTitle, warningOptions);
-        } 
-        
-        // OneSignal Fallback
+        }
+
+        // OneSignal Fallback (Reliable)
         if (window.OneSignalDeferred) {
             OneSignalDeferred.push(function(OneSignal) {
-                try {
-                    OneSignal.Notifications.displayNotification(warningTitle, warningOptions);
-                } catch(e) { console.log("AI alert error."); }
+                OneSignal.Notifications.displayNotification(warningTitle, warningOptions);
             });
         }
     }
-});
+}
 
 function openStatsModal() {
     const total = quests.length;
