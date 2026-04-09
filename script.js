@@ -245,7 +245,7 @@ function saveTask() {
         loadQuests();    //  Refresh the task list
         hideTaskInput(); //  close the midal
     } else {
-        alert("Khali task nahi chalega!");
+        alert(" Enter your task!");
     }
 }
 
@@ -284,7 +284,7 @@ function pleadCase() {
 
     // 2.  Original logic to validate the reason
     if (!reason) { 
-        alert(" !"); 
+        alert(" Type anythink !"); 
         return; 
     }
 
@@ -313,7 +313,7 @@ function pressPin(num) {
 }
 
 function clearPin() {
-    enteredPin = " Type anythink ";
+    enteredPin = "";
     document.getElementById('pinDots').innerText = "**";
 }
 
