@@ -371,7 +371,7 @@ function sendAIAlert() {
     if (localStorage.getItem('isLoggedIn') === 'true') {
         const warningTitle = "🚨 AI SECURITY ALERT!";
         const warningOptions = {
-            body: "Simran, get back to focus! Activity detected outside the app. 🔥",
+            body: " Get back to focus! Activity detected outside the app. 🔥",
             icon: "images/stage1.jpg"
         };
 
