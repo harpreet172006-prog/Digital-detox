@@ -1,0 +1,571 @@
+:root {
+    --bg: #000000;
+    --card: #000000;
+    --primary:  #A855F7; 
+    --primary-glow: rgba(168, 85, 247, 0.4);
+    --secondary: #6B21A8;
+    --text: #FFFFFF;
+    --text-dim: #A0A0A0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    background-color: #050505;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    width: 360px;
+    height: 720px;
+    background: var(--bg);
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 8px solid #242323;
+    box-shadow : 0 0 40px rgba(168, 85, 247, 0.15);
+}
+
+.screen { display: none; height: 100%; width: 100%; }
+.screen.active { display: block; }
+
+ .page { 
+    display: none; 
+    height: 100%; 
+    width: 100%;
+    padding: 15px;
+    padding-bottom: 120px !important; /* Space for the bottom navigation bar */
+    overflow-y: auto !important;      /* Enable vertical scrolling for content */
+    scrollbar-width: none; 
+    box-sizing: border-box;
+}
+
+.page.active { 
+    display: block !important; 
+    visibility: visible !important; 
+}
+
+/* Stats Page Specific Fix */
+#statsPage {
+    background: #000;
+    height: 100%;       /* Maintain 100% height for consistent layout */
+    width: 100%;
+    display: none;
+    overflow-y: auto !important; /* Enable scrolling for this specific section */
+    padding: 20px;
+    padding-bottom: 220px !important; /* Exter spacing for bottom navigation  */
+    box-sizing: border-box;
+}
+ 
+/* Login Styling */
+.login-box { padding: 60px 30px; text-align: center; color: white; }
+.app-logo-main { font-size: 60px; margin-bottom: 10px; }
+.glow-text { color: #FFFFFF; text-shadow: 0 0 10px rgba(168, 85, 247, 0.4); }
+.input-group input {
+    width: 100%; padding: 12px; margin: 8px 0;
+    background: #000000; border: 1px solid #333;
+    border-radius: 10px; color: white; outline: none;
+}
+ 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 20px 10px 20px !important; /* Top, Right, Bottom, Left */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header h2 {
+    margin: 0 !important;
+    font-size: 24px;
+    color: #FFFFFF !important;
+}
+
+.header p {
+    margin: 5px 0 0 0 !important;
+    font-size: 14px;
+    color: #FFFFFF !important;
+}
+.profile-circle { width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; color: white; }
+
+ 
+/* --- UI OPTIMIZATION: Reduced the size of Dashbard Stats cards --- */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.stats-grid .glass-card {
+    padding: 10px 5px !important;  
+    min-height: 60px;   
+    text-align: center;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 15px rgba(168,85,247,0.4);
+    transition: 0.3s ease;
+}
+ 
+.stat-val { display: block; font-size: 26px; font-weight: bold; color: white; } /* Font size chhota kiya */
+.stat-lbl { font-size: 13px !important; color: var(--text-dim); }
+
+/*  Reduced Tree Wrapper size for better layout fit */
+#treeWrapper {
+    height: 120px; 
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: 10px;
+}
+#visualtreeImg{max-height: 100 px !important; width: auto;}
+
+/* Bottom Nav */
+.bottom-nav {
+    position: absolute; 
+    bottom: 0; 
+    width: 100%; 
+    height: 70px;
+    background: #121212; 
+    display: flex; 
+    justify-content: space-around;
+    align-items: center; 
+    border-top: 1px solid #333;  
+    z-index: 1000; 
+}
+
+.nav-item { 
+    font-size: 24px; 
+    cursor: pointer; 
+    opacity: 0.6;  
+    transition: 0.3s; 
+}
+
+/* Quest Header (Fix for 'See All' Alignment) */
+.quest-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: 25px; 
+    padding: 0 10px;  
+    color: white; 
+}
+
+.quest-header h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.quest-header span {
+    color: var(--primary);
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.quest-header span:hover {
+    text-shadow: 0 0 8px var(--primary);
+}
+
+/* Stats & Tree */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.stats-grid .glass-card { padding: 12px 10px; min-height: 75px; text-align: center; }
+.stat-val { display: block; font-size: 22px; font-weight: bold; color: white; }
+.stat-lbl { font-size: 10px; color: var(--text-dim); }
+#treeWrapper { height: 160px; display: flex; align-items: flex-end; justify-content: center; }
+
+/* Quest List (FIXED ALIGNMENT) */
+.quest-list .glass-card {
+    margin-bottom: 12px;
+    padding: 12px 15px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.quest-list span {
+    flex: 1;
+    margin-left: 12px;
+    font-size: 14px;
+    white-space: normal;
+    line-height: 1.2;
+}
+
+/* Timer Button on Quests */
+.timer-btn-small {
+    background: rgba(255, 145, 0, 0.15);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* --- FOCUS TIMER MODAL (FIXED SIZE) --- */
+#focusModal {
+    position: absolute;  
+    top: 0; left: 0; width: 100%; height: 100%;
+    background:   rgba(168, 85, 247, 0.4);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    text-align: center;
+}
+
+.timer-circle {
+    width: 160px;  
+    height: 160px;
+    border-radius: 50%;
+    border: 6px solid #222;
+    border-top: 6px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    position: relative;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
+
+.timer-text { 
+    font-size: 2.8rem; 
+    color: var(--primary); 
+    font-weight: bold; 
+    text-shadow: 0 0 15px rgba(125, 30, 163, 0.5); 
+}
+
+.btn-quit {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* UI Elements */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid  rgba(168, 85, 247, 0.4);
+    border-radius: 20px;
+}
+
+.fab {
+    position: absolute; bottom: 85px; right: 20px;
+    width: 50px; height: 50px; border-radius: 50%;
+    background: var(--primary); color: white; border: none;
+    font-size: 24px; z-index: 2000; display: flex;
+    justify-content: center; align-items: center;
+    box-shadow: 0 8px 15px  rgba(168, 85, 247, 0.4);
+}
+
+.btn-primary {
+    width: 100%; padding: 12px; background: var(--primary);
+    border: none; border-radius: 10px; color: white;
+    font-weight: bold; cursor: pointer;
+}
+
+/* Stats Page Ring */
+.progress-circle {
+    width: 140px; height: 140px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: conic-gradient(var(--primary) 0%, #333 0%); 
+    position: relative; margin: 15px auto;
+}
+.progress-circle::before {
+    content: ""; position: absolute; width: 115px; height: 115px;
+    background: #1e1e1e; border-radius: 50%;
+}
+.progress-circle span { position: relative; z-index: 10; font-size: 24px; font-weight: bold; color: white; }
+ 
+/* Animations */
+.animate-fade { animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* AI Gatekeeper Modal Overlay */
+.modal-overlay {
+    position: absolute;    
+    top: 0;
+    left: 0;
+    width: 100vw;      
+    height: 100vh;    
+    background: rgba(0, 0, 0, 0.9); 
+    display: none;       
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}       
+
+.modal-content {
+    background: #121212;
+    padding: 30px;
+    border-radius: 20px;
+    width: 320px;
+    border: 1px solid  #A855F7;  
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 30px rgba(255, 140, 0, 0.2);
+}
+
+#aiReason {
+    width: 100%;
+    height: 80px;
+    background: #222;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 15px;
+    font-family: inherit;
+}
+
+.custom-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background: #1a1a1a;
+    border: 1px solid #381969;
+    border-radius: 15px;
+    padding: 20px;
+    z-index: 100;
+    text-align: center;
+}
+
+#newTaskName {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 5px;
+}
+
+.btn-add { background:  #6B21A8; color: #000; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; }
+.btn-cancel { background: transparent; color: #aaa; border: none; margin-left: 10px; cursor: pointer; }
+
+.page h2, .app-container h2 {
+    color: #FFFFFF !important;
+}
+/* 1.  Applying white color to Header snd Titles for dark them consistency */
+h1, h2, h3, .app-logo-main, .main-title {
+    color: #FFFFFF !important;
+}
+
+/* 2. Ensuring Quest/task text remains white and readable */
+.glass-card span {
+    color: #FFFFFF !important;
+}
+ 
+/* 3.  setting white color for statistics and Labels */
+.stat-val, .stat-lbl {
+    color: #FFFFFF !important;
+}
+
+/* 4. Applying white color to sub-titles and paragraph text */
+.sub-title, p {
+    color: #FFFFFF !important;
+}
+/* 5. Color-codimg for Statistics Modal (Success vs Pending  */
+#modalDone {
+    color: #00ff88 !important;
+}
+
+#modalPending {
+    color: #ff4444 !important;
+}
+/* Zen Timer Card Styling */
+.zen-timer-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 25px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.zen-label { font-size: 10px; color: #888; letter-spacing: 2px; font-weight: 600; }
+.timer-display { font-size: 45px; font-weight: bold; color: #fff; margin: 10px 0; text-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+.time-options { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+.time-btn { background: #121212; border: 1px solid #333; color: #fff; padding: 6px 12px; border-radius: 10px; font-size: 10px; cursor: pointer; transition: 0.3s; }
+.time-btn:hover { border-color: #A855F7; background: rgba(168, 85, 247, 0.1); }
+.start-focus-btn { width: 100%; padding: 14px; background: #A855F7; border: none; border-radius: 15px; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(168, 85, 247, 0.3); }
+
+/* Graph Chart Styling */
+.bar-chart { display: flex; align-items: flex-end; justify-content: space-around; height: 130px; padding: 10px; }
+.bar { width: 22px; background: #A855F7; border-radius: 6px 6px 2px 2px; position: relative; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+.bar span { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-size: 10px; color: #fff; font-weight: bold; }
+ 
+.strict-bar-fill {
+    width: 20px;
+    background: linear-gradient(to top, #FF8C00, #A855F7);
+    border-radius: 4px;
+    transition: height 0.6s ease;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+/* --- FIX 1: SEE ALL (SUMMARY) MODAL CENTER ALIGNMENT --- */
+#statsModal {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none; /* JS se flex hoga */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+#statsModal.active{
+    display: flex !important;
+}
+
+#statsModal .glass-card {
+    width: 85%;
+    padding: 25px;
+    border: 1px solid var(--primary);
+    text-align: center;
+    box-shadow: 0 0 25px var(--primary-glow);
+}
+
+/* --- FIX 2: STRICT GRAPH BARS STYLING --- */
+#barWrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    width: 100%;
+    height: 150px !important;
+    padding-bottom: 5px;
+}
+
+.strict-bar-fill {
+    width: 22px;
+    background: linear-gradient(to top, #FF8C00, #A855F7);
+    border-radius: 4px 4px 2px 2px;
+    transition: height 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+    position: relative;
+}
+
+/* Optional: Display minutes on hover */
+.strict-bar-fill:hover::after {
+    content: attr(data-mins) "m";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: white;
+} 
+
+#statsPage .stats-grid {
+    display: flex;       
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 10px;
+    width: 100%;        
+    padding: 0 10px;    
+}
+
+ #statsPage .stats-grid .glass-card {
+    flex: 1; 
+    padding: 5px !important;
+    height: 60px !important;  
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*  Resetting margins to ensure smoth scrolling */
+#statsPage .stats-grid .glass-card h2, 
+#statsPage .stats-grid .glass-card p {
+    margin: 0 !important;
+    line-height: 1.2;
+}
+/* MOBILE RESPONSIVENESS: Special adjustment for devices under 600px */
+ @media only screen and (max-width: 600px) {
+    body {
+        padding: 0;
+        margin: 0;
+        background: #000;
+        display: block; /* Align to top for mobile view */
+    }
+
+    /* Main Container Adjustment for Mobile */
+    .app-container {
+        width: 100vw;       /* Full viewport width */
+        height: 100vh;      /* Full viewport height */
+        margin: 0;
+        border: none;       /* Remove border for native app feel */
+        border-radius: 0;   /* Square corners for full-screen display */
+        box-shadow: none;
+    }
+
+    /* Optimized UI Elements for Small Screens */
+    .glass-card {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 12px;
+        border-radius: 15px;
+    }
+
+    /* Enhanced Touch Targets for Mobile Interaction */
+    .start-focus-btn, .btn-primary {
+        padding: 16px;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    /* Navigation Adjustment */
+    .bottom-nav {
+        height: 75px;
+        padding-bottom: env(safe-area-inset-bottom); /* Support for notch phones */
+    }
+
+    /* Graph Container Scrolling */
+    .graph-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* --- MINIMALIST SCROLLBAR STYLING --- */
+#modalLogList::-webkit-scrollbar {
+    width: 4px;
+}
+
+#modalLogList::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#modalLogList::-webkit-scrollbar-thumb {
+    background: #A855F7;
+    border-radius: 10px;
+}
+
+#modalLogList::-webkit-scrollbar-thumb:hover {
+    background: #6B21A8;
+} 
+ 
