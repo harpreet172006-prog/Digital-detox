@@ -284,7 +284,7 @@ function pleadCase() {
 
     // 2.  Original logic to validate the reason
     if (!reason) { 
-        alert("Pehle reason toh likho!"); 
+        alert(" !"); 
         return; 
     }
 
@@ -313,7 +313,7 @@ function pressPin(num) {
 }
 
 function clearPin() {
-    enteredPin = "";
+    enteredPin = " Type anythink ";
     document.getElementById('pinDots').innerText = "**";
 }
 
@@ -371,8 +371,8 @@ function sendAIAlert() {
     if (localStorage.getItem('isLoggedIn') === 'true') {
         const warningTitle = "🚨 AI SECURITY ALERT!";
         const warningOptions = {
-            body: " Get back to focus! Activity detected outside the app. 🔥",
-            icon: "images/stage1.jpg"
+            body: "  Get back to focus! Activity detected outside the app. 🔥",
+            icon: "images/my-logo.png"
         };
 
         // Native Alert (Fastest)
