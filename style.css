@@ -46,7 +46,8 @@ body {
     padding: 15px;
     padding-bottom: 120px !important; /* Space for the bottom navigation bar */
     overflow-y: auto !important;      /* Enable vertical scrolling for content */
-    scrollbar-width: none; 
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) #000; 
     box-sizing: border-box;
 }
 
@@ -568,20 +569,27 @@ h1, h2, h3, .app-logo-main, .main-title {
 }
 
 /* --- MINIMALIST SCROLLBAR STYLING --- */
-#modalLogList::-webkit-scrollbar {
-    width: 4px;
+::-webkit-scrollbar {
+    width: 6px;
 }
 
-#modalLogList::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-#modalLogList::-webkit-scrollbar-thumb {
-    background: #A855F7;
+::-webkit-scrollbar-track {
+    background: #000000;
     border-radius: 10px;
 }
 
-#modalLogList::-webkit-scrollbar-thumb:hover {
-    background: #6B21A8;
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--secondary), var(--primary));
+    border-radius: 10px;
+    box-shadow: 0 0 8px var(--primary-glow);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+    box-shadow: 0 0 12px var(--primary);
+}
+.page, .quest-list, #modalLogList{
+    scroll-behavior: smooth;
+    padding-right: 5px;
 } 
  
